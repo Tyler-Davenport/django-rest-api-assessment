@@ -1,0 +1,30 @@
+[
+  {
+    "model": "tunaapi.genre",
+    "pk": 1,
+    "fields": {
+      "description": "Alternative Rock"
+    }
+  },
+  {
+    "model": "tunaapi.genre",
+    "pk": 2,
+    "fields": {
+      "description": "Rap"
+    }
+  },
+  {
+    "model": "tunaapi.genre",
+    "pk": 3,
+    "fields": {
+      "description": "Rock"
+    }
+  },
+  {
+    "model": "tunaapi.genre",
+    "pk": 4,
+    "fields": {
+      "description": "Hip Hop"
+    }
+  }
+]

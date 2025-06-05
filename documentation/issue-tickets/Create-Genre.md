@@ -1,9 +1,11 @@
-# Create a new genre
+# Create a new genre CHECK
 
 ## Description
+
 This ticket requests the implementation of a route that allows the creation of a new genre.
 
 ## Request
+
 - **Method:** POST
 - **Path:** /genres
 - **Body**
@@ -14,6 +16,7 @@ This ticket requests the implementation of a route that allows the creation of a
   ```
 
 ## Response
+
 - **Body**
   ```json
   {
