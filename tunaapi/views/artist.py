@@ -3,34 +3,34 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from tunaapi.models.artist import Artist
 
-class ArtistSerializer(ViewSet):
-    class ArtistSerializer(serializers.Serializer):
-        id = serializers.IntegerField(read_only=True)
-        name = serializers.CharField(max_length=100)
-        age = serializers.IntegerField()
-        bio = serializers.CharField()
+class ArtistSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(max_length=100)
+    age = serializers.IntegerField()
+    bio = serializers.CharField()
 
+class ArtistViewSet(ViewSet):
     def list(self, request):
         # Query the database for all artists
         artists = Artist.objects.all()
-        serializer = self.ArtistSerializer(artists, many=True)
+        serializer = ArtistSerializer(artists, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         # This would normally retrieve a specific artist by ID
-        artist = {"name": "Artist Name", "age": 25, "bio": "Artist Bio"}
-        serializer = self.ArtistSerializer(artist)
+        artist = Artist.objects.get(pk=pk)
+        serializer = ArtistSerializer(artist)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
         # Create a new artist
-        serializer = self.ArtistSerializer(data=request.data)
+        serializer = ArtistSerializer(data=request.data)
         if serializer.is_valid():
             artist = Artist.objects.create(
                 name=serializer.validated_data['name'],
                 age=serializer.validated_data['age'],
                 bio=serializer.validated_data['bio']
             )
-            serializer = self.ArtistSerializer(artist)
+            serializer = ArtistSerializer(artist)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

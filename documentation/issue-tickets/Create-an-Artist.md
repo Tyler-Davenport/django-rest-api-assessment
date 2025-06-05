@@ -1,4 +1,4 @@
-# Create a new artist
+# Create a new artist check
 
 ## Description
 This ticket requests the implementation of a route that allows the creation of a new artist.

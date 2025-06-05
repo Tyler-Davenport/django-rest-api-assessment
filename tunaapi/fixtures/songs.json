@@ -1,0 +1,32 @@
+[
+  {
+    "model": "tunaapi.song",
+    "pk": 1,
+    "fields": {
+      "title": "Shy Away",
+      "artist_id": 1,
+      "album": "Scaled and Icy",
+      "length": 180
+    }
+  },
+  {
+    "model": "tunaapi.song",
+    "pk": 2,
+    "fields": {
+      "title": "Bluebery yum yum",
+      "artist_id": 1,
+      "album": "Dont remember",
+      "length": 180
+    }
+  },
+  {
+    "model": "tunaapi.song",
+    "pk": 3,
+    "fields": {
+      "title": "All Night Long",
+      "artist_id": 1,
+      "album": "I dont know",
+      "length": 180
+    }
+  }
+]

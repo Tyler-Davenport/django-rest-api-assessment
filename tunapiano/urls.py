@@ -18,10 +18,14 @@ from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-from tunaapi.views.artist import ArtistSerializer
+from tunaapi.views.artist import ArtistViewSet
+from tunaapi.views.genre import GenreViewSet
+from tunaapi.views.song import SongViewSet
 
 router = DefaultRouter(trailing_slash=False)
-router.register(r'artists', ArtistSerializer, basename='artist')
+router.register(r'artists', ArtistViewSet, basename='artist')
+router.register(r'genres', GenreViewSet, basename='genre')
+router.register(r'songs', SongViewSet, basename='song')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,4 +1,4 @@
-# Retrieve a list of all artists
+# Retrieve a list of all artists CHECK
 
 ## Description
 This ticket requests the implementation of a route that retrieves a list of all artists.
