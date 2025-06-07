@@ -30,3 +30,19 @@ class GenreViewSet(ViewSet):
             serializer = GenreSerializer(genre)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        # Delete a genre by ID
+        genre = Genre.objects.get(pk=pk)
+        genre.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, pk=None):
+        # Update an existing genre
+        genre = Genre.objects.get(pk=pk)
+        genre.description = request.data["description"]
+        genre.save()
+
+        # Serialize the updated genre and return the response
+        serializer = GenreSerializer(genre)
+        return Response(serializer.data, status=status.HTTP_200_OK)

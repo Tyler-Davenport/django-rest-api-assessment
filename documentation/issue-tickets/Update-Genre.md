@@ -1,4 +1,4 @@
-# Update an existing genre
+# Update an existing genre CHECK
 
 ## Description
 This ticket requests the implementation of a route that allows updating an existing genre.
