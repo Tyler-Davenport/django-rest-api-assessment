@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from tunaapi.models.song import Song
 from tunaapi.models.artist import Artist
+from tunaapi.models.genre import SongGenre
 
 class SongViewSet(ViewSet):
     class SongSerializer(serializers.Serializer):
@@ -18,9 +19,39 @@ class SongViewSet(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
+        # Retrieve the song by ID
         song = Song.objects.get(pk=pk)
-        serializer = self.SongSerializer(song)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # Fetch the artist details
+        artist = song.artist_id
+        artist_data = {
+            "id": artist.id,
+            "name": artist.name,
+            "age": artist.age,
+            "bio": artist.bio
+        }
+
+        # Fetch associated genres using the SongGenre table
+        song_genres = song.songgenre_set.all()
+        genres = [
+            {
+                "id": sg.genre_id.id,
+                "description": sg.genre_id.description
+            }
+            for sg in song_genres
+        ]
+
+        # Construct the response data
+        song_data = {
+            "id": song.id,
+            "title": song.title,
+            "artist": artist_data,
+            "album": song.album,
+            "length": song.length,
+            "genres": genres
+        }
+
+        return Response(song_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         serializer = self.SongSerializer(data=request.data)
@@ -51,3 +82,17 @@ class SongViewSet(ViewSet):
             song.save()
             return Response(self.SongSerializer(song).data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SongGenreViewSet(ViewSet):
+    def list(self, request):
+        # Query the database for all song-genre relationships
+        song_genres = SongGenre.objects.all()
+        data = [
+            {
+                "id": sg.id,
+                "song_id": sg.song_id.id,
+                "genre_id": sg.genre_id.id
+            }
+            for sg in song_genres
+        ]
+        return Response(data, status=status.HTTP_200_OK)

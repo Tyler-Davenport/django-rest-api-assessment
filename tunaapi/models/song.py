@@ -5,6 +5,7 @@ class Song(models.Model):
     artist_id = models.ForeignKey('Artist', on_delete=models.CASCADE, related_name='songs')
     album = models.CharField(max_length=100, blank=True, null=True)
     length = models.IntegerField()
+    genre = None  # Remove the direct ForeignKey relationship
 
     def __str__(self):
         return self.title

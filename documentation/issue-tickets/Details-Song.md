@@ -1,13 +1,16 @@
-# Retrieve details of a single song with associated genres and artist details
+# Retrieve details of a single song with associated genres and artist details CHECK
 
 ## Description
+
 This ticket requests the implementation of a route that retrieves the details of a single song, including its associated genres and artist details.
 
 ## Request
+
 - **Method:** GET
 - **Path:** /songs/{songId}
 
 ## Response
+
 - **Body**
   ```json
   {
