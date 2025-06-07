@@ -17,8 +17,27 @@ class GenreViewSet(ViewSet):
     def retrieve(self, request, pk=None):
         # Retrieve a specific genre by ID
         genre = Genre.objects.get(pk=pk)
-        serializer = GenreSerializer(genre)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # Fetch songs associated with the genre using the SongGenre table
+        song_genres = genre.songgenre_set.all()
+        songs = [
+            {
+                "id": sg.song_id.id,
+                "title": sg.song_id.title,
+                "artist_id": sg.song_id.artist_id.id,
+                "album": sg.song_id.album,
+                "length": sg.song_id.length
+            }
+            for sg in song_genres
+        ]
+
+        genre_data = {
+            "id": genre.id,
+            "description": genre.description,
+            "songs": songs
+        }
+
+        return Response(genre_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         # Create a new genre

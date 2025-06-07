@@ -1,4 +1,4 @@
-# Retrieve details of a single artist with associated songs
+# Retrieve details of a single artist with associated songs CHECK
 
 ## Description
 This ticket requests the implementation of a route that retrieves the details of a single artist, including the songs associated with them.

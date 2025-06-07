@@ -17,10 +17,29 @@ class ArtistViewSet(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        # This would normally retrieve a specific artist by ID
+        # Retrieve a specific artist by ID
         artist = Artist.objects.get(pk=pk)
-        serializer = ArtistSerializer(artist)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        songs = artist.songs.all()  # Fetch songs associated with the artist
+
+        # Serialize artist and songs
+        artist_data = {
+            "id": artist.id,
+            "name": artist.name,
+            "age": artist.age,
+            "bio": artist.bio,
+            "song_count": songs.count(),
+            "songs": [
+                {
+                    "id": song.id,
+                    "title": song.title,
+                    "album": song.album,
+                    "length": song.length
+                }
+                for song in songs
+            ]
+        }
+
+        return Response(artist_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         # Create a new artist
