@@ -1,4 +1,4 @@
-# Update an existing artist
+# Update an existing artist CHECK
 
 ## Description
 This ticket requests the implementation of a route that allows updating an existing artist.

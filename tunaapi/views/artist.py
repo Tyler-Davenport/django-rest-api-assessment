@@ -34,3 +34,21 @@ class ArtistViewSet(ViewSet):
             serializer = ArtistSerializer(artist)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        # Delete an artist by ID
+            artist = Artist.objects.get(pk=pk)
+            artist.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, pk=None):
+        # Update an existing artist
+        artist = Artist.objects.get(pk=pk)
+        artist.name = request.data["name"]
+        artist.age = request.data["age"]
+        artist.bio = request.data["bio"]
+        artist.save()
+
+        # Serialize the updated artist and return the response
+        serializer = ArtistSerializer(artist)
+        return Response(serializer.data, status=status.HTTP_200_OK)
