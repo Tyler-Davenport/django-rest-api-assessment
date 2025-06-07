@@ -19,7 +19,7 @@ class GenreViewSet(ViewSet):
         genre = Genre.objects.get(pk=pk)
 
         # Fetch songs associated with the genre using the SongGenre table
-        song_genres = genre.songgenre_set.all()
+        song_genres = genre.song_genres.all()
         songs = [
             {
                 "id": sg.song_id.id,

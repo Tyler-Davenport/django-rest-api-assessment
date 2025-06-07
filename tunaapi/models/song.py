@@ -14,3 +14,13 @@ class Song(models.Model):
         verbose_name = "Song"
         verbose_name_plural = "Songs"
         ordering = ['title']
+
+    @property
+    def artist(self):
+        return self.artist_id
+
+    @artist.setter
+    def artist(self, value):
+        self.artist_id = value
+
+        
