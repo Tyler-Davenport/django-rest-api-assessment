@@ -32,7 +32,7 @@ class SongViewSet(ViewSet):
         }
 
         # Fetch associated genres using the SongGenre table
-        song_genres = song.songgenre_set.all()
+        song_genres = song.song_genres.all()
         genres = [
             {
                 "id": sg.genre_id.id,
